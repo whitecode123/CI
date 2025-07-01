@@ -1,0 +1,16 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [  
+      'build',
+      '-t', 'gcr.io/kdt1-finalproject/njs-web:web-$COMMIT_SHA',
+      '-f', 'web/Dockerfile',
+      'web'
+    ]
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'push', 'gcr.io/kdt1-finalproject/njs-web:web-$COMMIT_SHA'
+    ]
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+timeout: 600s
