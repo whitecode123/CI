@@ -2,13 +2,13 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: [  
       'build',
-      '-t', 'gcr.io/kdt1-finalproject/njs-web:web-$github_sha',
+      '-t', 'gcr.io/kdt1-finalproject/njs-web:web-$COMMIT_SHA',
       '-f', 'web/Dockerfile',
       'web'
     ]
   - name: 'gcr.io/cloud-builders/docker'
     args: [
-      'push', 'gcr.io/kdt1-finalproject/njs-web:web-$github_sha'
+      'push', 'gcr.io/kdt1-finalproject/njs-web:web-$COMMIT_SHA'
     ]
 
 options:
