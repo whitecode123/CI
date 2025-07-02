@@ -1,11 +1,6 @@
-name: Build, Push Docker, PR to k8s Repo
-
 on:
   push:
-    paths:
-      - 'web/**'
-      - 'Dockerfile'
-    branches: [main]
+    branches: ["main"]
 
 jobs:
   build-and-pr:
@@ -19,32 +14,18 @@ jobs:
         with:
           credentials_json: ${{ secrets.KDT1FINAL }}
 
-      - name: Configure Docker for GCR
-        run: gcloud auth configure-docker
-
-      # Docker 이미지 빌드 & 태깅
-      - name: Build Docker image
-        run: |
-          docker build -t gcr.io/kdt1-finalproject/njs-web:web-${{ github.sha }} .
-
-      # GCR로 푸시
-      - name: Push Docker image to GCR
-        run: |
-          docker push gcr.io/kdt1-finalproject/njs-web:web-${{ github.sha }}
-
       # k8s 레포 checkout
       - name: Checkout k8s repo
         uses: actions/checkout@v4
         with:
           repository: whitecode123/k8s
           token: ${{ secrets.learn-k8s-cicd}}
-          path: k8s
+          path: k8s/web
 
       # deployment.yaml 이미지 태그 변경
       - name: Update image tag in deployment.yaml
         run: |
-          sed -i 's|image: .*$|image: gcr.io/kdt1-finalproject/njs-web:web-${{ github.sha }}|' k8s/web/pod-web.yaml
-
+             sed -i "s|image: gcr.io/kdt1-finalproject/njs-web:.*|image: gcr.io/kdt1-finalproject/njs-web:web-${github.sha}|" k8s/web/pod-web.yaml
       # PR 생성
       - name: Create Pull Request to k8s repo
         uses: peter-evans/create-pull-request@v6
@@ -54,4 +35,4 @@ jobs:
           title: "Update image tag to ${{ github.sha }}"
           body: "Auto PR: Update image tag to ${{ github.sha }}"
           branch: "auto/update-image-${{ github.sha }}"
-          path: k8s
+          path: k8s/web
