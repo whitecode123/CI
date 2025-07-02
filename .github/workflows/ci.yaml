@@ -25,7 +25,7 @@ jobs:
       # deployment.yaml 이미지 태그 변경
       - name: Update image tag in deployment.yaml
         run: |
-             sed -i "s|image: gcr.io/kdt1-finalproject/njs-web:.*|image: gcr.io/kdt1-finalproject/njs-web:web-${github.sha}|" k8s/web/pod-web.yaml
+             sed -i "s|image: gcr.io/kdt1-finalproject/njs-web:.*|image: gcr.io/kdt1-finalproject/njs-web:web-${{github.sha}}|" k8s/web/pod-web.yaml
       # PR 생성
       - name: Create Pull Request to k8s repo
         uses: peter-evans/create-pull-request@v6
