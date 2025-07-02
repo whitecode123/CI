@@ -20,7 +20,7 @@ jobs:
         with:
           repository: whitecode123/k8s
           token: ${{ secrets.learnk8scicd }}
-          path: k8s/web
+          path: k8s 
 
       - name: Update image tag in deployment.yaml
         run: |
@@ -35,4 +35,4 @@ jobs:
           title: "Update image tag to ${{ github.sha }}"
           body: "Auto PR: Update image tag to ${{ github.sha }}"
           branch: "auto/update-image-${{ github.sha }}"
-          path: k8s/web
+          path: k8s
