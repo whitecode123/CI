@@ -13,6 +13,9 @@ jobs:
         uses: google-github-actions/auth@v2
         with:
           credentials_json: ${{ secrets.KDT1FINAL }}
+      # docker 로그인      
+      - name: Configure Docker for Artifact Registry
+        run: gcloud auth configure-docker      
 
 
       # Docker build
