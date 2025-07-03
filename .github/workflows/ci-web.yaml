@@ -50,7 +50,7 @@ jobs:
       - name: commit and push
         run: |
           cd k8s
-          git : remote set -url origin https://github.com/whitecode123/k8s.git
+          git remote set -url origin https://github.com/whitecode123/k8s.git
           git add web/pod-web.yaml
           git commit -m "Auto update image tag to ${{ github.sha }}"
           git push origin main
