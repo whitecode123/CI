@@ -58,5 +58,4 @@ jobs:
           GIT_AUTHOR_NAME: junseorho
           GIT_AUTHOR_EMAIL: nojun1217429@gmail.com
           GIT_COMMITTER_NAME: junseorho
-          GIT_COMMITTER_EMAIL: nojun1217429@gmail.com    
-      
+          GIT_COMMITTER_EMAIL: nojun1217429@gmail.com               
