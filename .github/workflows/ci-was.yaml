@@ -18,8 +18,12 @@ jobs:
       # docker 로그인      
       - name: Configure Docker for Artifact Registry
         run: gcloud auth configure-docker      
-
-
+       
+      # maven 빌드
+      - name: maven build
+        run: mvn clean package -DskipTests -PMySQL
+        working-directory: was/petclinic_btc
+    
       # Docker build
       - name: Build Docker image
         run: |
